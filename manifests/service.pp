@@ -3,10 +3,12 @@
 #
 # @api private
 class haproxy::service {
-  service { 'haproxy':
-    ensure     => running,
-    enable     => true,
-    hasstatus  => true,
-    hasrestart => true,
+  if $haproxy::service_manage {
+    service { 'haproxy':
+      ensure     => $haproxy::service_ensure,
+      enable     => $haproxy::service_enable,
+      hasstatus  => true,
+      hasrestart => true,
+    }
   }
 }
